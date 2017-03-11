@@ -6,6 +6,7 @@ Module to convert Roman numerals to integers and vice versa
 ```
 >>> import roman_numerals
 >>> roman_numerals.integer_to_numeral(25)
+'XXV'
 >>> roman_numerals.integer_to_numeral(35)
 'XXXV'
 >>> roman_numerals.integer_to_numeral(228)
