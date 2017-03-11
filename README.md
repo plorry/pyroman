@@ -5,15 +5,15 @@ Module to convert Roman numerals to integers and vice versa
 
 ```
 >>> import roman_numerals
->>> roman_numerals.integer_to_numeral(25)
+>>> pyroman.integer_to_numeral(25)
 'XXV'
->>> roman_numerals.integer_to_numeral(35)
+>>> pyroman.integer_to_numeral(35)
 'XXXV'
->>> roman_numerals.integer_to_numeral(228)
+>>> pyroman.integer_to_numeral(228)
 'CCXXVIII'
->>> roman_numerals.numeral_to_integer('CCXXVIII')
+>>> pyroman.numeral_to_integer('CCXXVIII')
 228
->>> roman_numerals.numeral_to_integer('CCXXVI')
+>>> pyroman.numeral_to_integer('CCXXVI')
 226
 ```
 
