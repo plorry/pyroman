@@ -81,7 +81,8 @@ def clean_numeral(numeral):
 
 def numeral_to_integer(numeral):
     '''
-    Takes a Roman Numeral string and converts it to an integer, which is returned
+    Takes a Roman Numeral string and converts it to an integer, which is returned.
+    Raises an error in the case that an improperly formed Roman Numeral is passed in.
 
     >>> numeral_to_integer('II')
     2
@@ -89,6 +90,10 @@ def numeral_to_integer(numeral):
     1996
     '''
     integer = compute_integer(numeral)
+    expected = integer_to_numeral(integer)
+    if not expected == numeral:
+        raise Exception("That doesn't look like a correct Roman Numeral to me. "
+                        "Did you mean {}?".format(expected))
     return integer
 
 
