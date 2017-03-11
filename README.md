@@ -4,7 +4,7 @@ Module to convert Roman numerals to integers and vice versa
 
 
 ```
->>> import roman_numerals
+>>> import pyroman
 >>> pyroman.integer_to_numeral(25)
 'XXV'
 >>> pyroman.integer_to_numeral(35)
