@@ -42,8 +42,7 @@ def integer_to_numeral(integer):
     >>> integer_to_numeral(3991)
     'MMMCMXCI'
     '''
-    numeral = build_string(integer)
-    return numeral
+    return build_string(integer)
 
 
 def build_string(integer, numeral=''):
@@ -55,9 +54,25 @@ def build_string(integer, numeral=''):
     >>> build_string(19, 'XX')
     'XXXIX'
     '''
-    cha, new_value = find_highest_mapping(integer)
+    (cha, new_value) = find_highest_mapping(integer)
     numeral = clean_numeral(numeral + cha)
     return numeral if new_value is 0 else build_string(new_value, numeral)
+
+
+def find_highest_mapping(integer):
+    '''
+    Takes an integer and returns the highest single Roman Numeral less than its value
+    and returns the Numeral and the integer minus the Numeral value
+
+    >>> find_highest_mapping(1)
+    ('I', 0)
+    >>> find_highest_mapping(20)
+    ('X', 10)
+    '''
+    (integer < 1 and raise_zero_exception())
+    return next((NUMERAL_MAPPING[value], integer - value)
+                for value in sorted(NUMERAL_MAPPING.keys(), reverse=True)
+                if integer >= value)
 
 
 def clean_numeral(numeral):
@@ -91,9 +106,7 @@ def numeral_to_integer(numeral):
     '''
     integer = compute_integer(numeral)
     expected = integer_to_numeral(integer)
-    if not expected == numeral:
-        raise Exception("That doesn't look like a correct Roman Numeral to me. "
-                        "Did you mean {}?".format(expected))
+    (expected != numeral and raise_invalid_exception(expected))
     return integer
 
 
@@ -108,20 +121,10 @@ def compute_integer(numeral, this_val=0, last_val=0, total=0):
                              new_total)
 
 
-def find_highest_mapping(integer):
-    '''
-    Takes an integer and returns the highest single Roman Numeral less than its value
-    and returns the Numeral and the integer minus the Numeral value
+def raise_zero_exception():
+    raise ValueError("Romans had no notion of zero or negative numbers")
 
-    >>> n, i = find_highest_mapping(1)
-    >>> n, i
-    ('I', 0)
-    >>> n, i = find_highest_mapping(20)
-    >>> n, i
-    ('X', 10)
-    '''
-    if integer < 1:
-        raise Exception("Romans had no notion of zero or negative numbers")
-    for value in sorted(NUMERAL_MAPPING.keys(), reverse=True):
-        if integer >= value:
-            return NUMERAL_MAPPING[value], integer - value
+
+def raise_invalid_exception(expected):
+    raise ValueError("That doesn't look like a correct Roman Numeral to me. "
+                     "Did you mean {}?".format(expected))
